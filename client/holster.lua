@@ -1,4 +1,4 @@
-local DATA_HOLSTERS <const> = lib.load("data.holsters")
+local DATA_HOLSTERS <const> = lib.load("data.holster")
 
 local function getGender(ped)
     local model = GetEntityModel(ped)
