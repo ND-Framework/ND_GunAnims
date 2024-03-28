@@ -32,13 +32,18 @@ local function holsterCheck(ped, playerWeapon, playerHolster, shouldUnholster)
     end
 end
 
-lib.onCache("weapon", function(value)
+AddEventHandler("ND_GunAnims:updateHolster", function(weapon, hide)
     local ped = cache.ped
     local playerHolster = GetPedDrawableVariation(ped, 7)
-
-    if not value then
-        return holsterCheck(ped, cache.weapon, playerHolster, false)
-    end
-
-    holsterCheck(ped, value, playerHolster, true)
+    holsterCheck(ped, weapon, playerHolster, hide)
 end)
+
+if GetResourceState("ox_inventory"):find("start") and GetConvarInt("inventory:weaponanims", 1) == 1 then
+    lib.onCache("weapon", function(value)
+        local ped = cache.ped
+        local playerHolster = GetPedDrawableVariation(ped, 7)
+        local weapon = value or cache.weapon
+        Wait(300)
+        holsterCheck(ped, weapon, playerHolster, value)
+    end)
+end
