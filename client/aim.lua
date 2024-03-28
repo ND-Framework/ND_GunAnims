@@ -30,7 +30,7 @@ if DATA_AIM.command then
     end, false)
 
     TriggerEvent("chat:addSuggestion", ("/%s"):format(DATA_AIM.command), "Weapon aim animation", {
-        { name = "Animation", help = "gang | hillbilly | default" }
+        { name = "animation", help = "gang | hillbilly | default" }
     })
 end
 
