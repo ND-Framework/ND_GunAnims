@@ -9,7 +9,7 @@ local function getGender(ped)
     end
 end
 
-local function holsterCheck(ped, playerWeapon, playerHolster, shouldUnholster)
+local function holsterCheck(ped, playerWeapon, shouldUnholster)
     local gender = getGender(ped)
     if not gender then return end
 
@@ -19,12 +19,14 @@ local function holsterCheck(ped, playerWeapon, playerHolster, shouldUnholster)
 
         if not holsterInfo or not lib.table.contains(holster.weapons, playerWeapon) then goto next end
 
+        local playerHolster = GetPedDrawableVariation(ped, holster.variation)
+
         if playerHolster == holsterInfo[1] and shouldUnholster then
             Wait(200)
-            SetPedComponentVariation(ped, 7, holsterInfo[2], 0, 0)
+            SetPedComponentVariation(ped, holster.variation, holsterInfo[2], 0, 0)
             return --print("Gun unholstered")
         elseif playerHolster == holsterInfo[2] then
-            SetPedComponentVariation(ped, 7, holsterInfo[1], 0, 0)
+            SetPedComponentVariation(ped, holster.variation, holsterInfo[1], 0, 0)
             return --print("Gun holstered")
         end
 
@@ -33,17 +35,13 @@ local function holsterCheck(ped, playerWeapon, playerHolster, shouldUnholster)
 end
 
 AddEventHandler("ND_GunAnims:updateHolster", function(weapon, hide)
-    local ped = cache.ped
-    local playerHolster = GetPedDrawableVariation(ped, 7)
-    holsterCheck(ped, weapon, playerHolster, hide)
+    holsterCheck(cache.ped, weapon, hide)
 end)
 
 if GetResourceState("ox_inventory"):find("start") and GetConvarInt("inventory:weaponanims", 1) == 1 then
     lib.onCache("weapon", function(value)
-        local ped = cache.ped
-        local playerHolster = GetPedDrawableVariation(ped, 7)
         local weapon = value or cache.weapon
         Wait(300)
-        holsterCheck(ped, weapon, playerHolster, value)
+        holsterCheck(cache.ped, weapon, value)
     end)
 end
