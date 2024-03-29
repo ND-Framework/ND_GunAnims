@@ -25,7 +25,7 @@ info.weaponGroups = {
     [`GROUP_PISTOL`] = "gang",
 }
 
--- If you add a weapon here it will ignore the one on it's group and instead play a specific anim set here.
+-- If you add a weapon here it will ignore the animation on it's group and instead play a specific animation set here.
 info.weapons = {
     [`WEAPON_STUNGUN`] = "police",
     [`WEAPON_SWITCHBLADE`] = false -- setting to false will not play any anim and instead use the in game default.
@@ -34,18 +34,22 @@ info.weapons = {
 -- if wearing specific clothing such as a holster then everything else ignored and that anim is used.
 info.clothing = {
     holster = {
-        anim = "police",
-        weapons = {`WEAPON_COMBATPISTOL`},
-        variation = 7,
-        male = {186, 183, 188},
-        female = {149}
+        {
+            anim = "police",
+            weapons = {`WEAPON_COMBATPISTOL`},
+            variation = 7,
+            male = {186, 183, 188},
+            female = {149}
+        }
     },
     unholster = {
-        anim = "police",
-        weapons = {`WEAPON_COMBATPISTOL`},
-        variation = 7,
-        male = {182, 179, 187},
-        female = {148}
+        {
+            anim = "police",
+            weapons = {`WEAPON_COMBATPISTOL`},
+            variation = 7,
+            male = {182, 179, 187},
+            female = {148}
+        }
     }
 }
 

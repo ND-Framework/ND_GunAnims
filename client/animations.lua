@@ -29,6 +29,7 @@ local function getWeaponAnim(ped, weapon, variant)
     local clothingInfo = DATA_ANIMATIONS?.clothing?[variant]
     local anim = nil
     local currentWeaponGroup = GetWeapontypeGroup(weapon)
+    local gender = getGender(ped)
 
     local animByGroup = weaponGroups?[currentWeaponGroup]
     if animByGroup or animByGroup == false then
@@ -40,15 +41,22 @@ local function getWeaponAnim(ped, weapon, variant)
         anim = animByWeapon
     end
 
-    if clothingInfo and lib.table.contains(clothingInfo.weapons, weapon) then
-        local gender = getGender(ped)
-        local components = clothingInfo[gender]
-        if not components then goto skip end
+    if not clothingInfo then goto skip end
 
-        local holster = GetPedDrawableVariation(ped, clothingInfo.variation)
-        if not lib.table.contains(components, holster) then goto skip end
+    for i=1, #clothingInfo do
+        local info = clothingInfo[i]
+        if not lib.table.contains(info.weapons, weapon) then goto next end
 
-        anim = clothingInfo.anim
+        
+        local components = info[gender]
+        if not components then goto next end
+
+        local holster = GetPedDrawableVariation(ped, info.variation)
+        if lib.table.contains(components, holster) then
+            anim = info.anim
+        end
+
+        ::next::
     end
 
     ::skip::
