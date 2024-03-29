@@ -39,3 +39,7 @@ if DATA_AIM.default then
 end
 
 exports("setAimAnim", setAimAnim)
+
+exports("getAimAnim", function()
+    return LocalPlayer.sate.weaponAnimOverride or "default"
+end)
