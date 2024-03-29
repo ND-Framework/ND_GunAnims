@@ -41,5 +41,5 @@ end
 exports("setAimAnim", setAimAnim)
 
 exports("getAimAnim", function()
-    return LocalPlayer.sate.weaponAnimOverride or "default"
+    return LocalPlayer.state.weaponAnimOverride or "default"
 end)
