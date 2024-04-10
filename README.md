@@ -94,7 +94,7 @@ Animation name by weapon hash, if you add a weapon here it will ignore the anima
 
 #### info.clothing
 
-Animtion by clothing component, if wearing specific clothing such as a holster then everything else ignored and that anim is used.
+Animation by clothing component, if wearing specific clothing such as a holster then everything else ignored and that anim is used.
 
 * `holster`: animations played based on clothing when weapon is holstered.
 * `unholster`: animations played based on clothing when weapon is unholstered.
