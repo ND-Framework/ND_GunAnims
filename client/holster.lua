@@ -20,13 +20,14 @@ local function holsterCheck(ped, playerWeapon, shouldUnholster)
         if not holsterInfo or not lib.table.contains(holster.weapons, playerWeapon) then goto next end
 
         local playerHolster = GetPedDrawableVariation(ped, holster.variation)
+        local holsterTexture = GetPedTextureVariation(ped, holster.variation)
 
         if playerHolster == holsterInfo[1] and shouldUnholster then
             Wait(200)
-            SetPedComponentVariation(ped, holster.variation, holsterInfo[2], 0, 0)
+            SetPedComponentVariation(ped, holster.variation, holsterInfo[2], holsterTexture, 0)
             return --print("Gun unholstered")
         elseif playerHolster == holsterInfo[2] then
-            SetPedComponentVariation(ped, holster.variation, holsterInfo[1], 0, 0)
+            SetPedComponentVariation(ped, holster.variation, holsterInfo[1], holsterTexture, 0)
             return --print("Gun holstered")
         end
 
